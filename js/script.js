@@ -13,7 +13,6 @@ function randomPosition() {
 // crear funcion para guardar secuencia con parametro entrada
 // donde una secuencia = array (numeros)
 
-// let sequenceArray =[]
 let level = 0;
 
 function createSequence(maxSequence) {
@@ -29,20 +28,35 @@ function increaseLevel() {
     level = level + 1;
 }
 
-// Crear una funcion inicializar start_game, vinculado al button
+function hideStartGameButton (){
+    let startButtonElement = document.getElementById("startButton")
+    startButtonElement.classList.add("invisible");
+}
+
+function showTextLevel(){
+    let textLevelElement = document.getElementById("textLevel")
+    textLevelElement.classList.remove("invisible");
+}
+
+// Crear una funcion inicializar start_game, vinculado al button y después ocultarlo.
 function startGame() {
     increaseLevel();
     const sequence = createSequence(level)
-    console.log(sequence)
-    // bucle for in de sequence
 
-    sequence.forEach((position, index) => {
-        console.log(position)
+    hideStartGameButton();
 
-        setTimeout(() => {
-            activePosition(position);
-        },(index +1)* 900);
-    });
+    showTextLevel();
+
+    function showSequenceGame() {
+        sequence.forEach((position, index) => {
+            console.log(position)
+
+            setTimeout(() => {
+                activePosition(position);
+            }, (index + 1) * 900);
+        });
+    }
+    showSequenceGame();
 }
 // en cada vuelta llamar a setTimeout para poner los colores
 

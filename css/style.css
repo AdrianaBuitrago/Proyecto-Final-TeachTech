@@ -37,7 +37,6 @@ body {
     border-radius: 20px;
 }
 
-/* crear startButton */
 .board {
     height: 520px;
 }
@@ -63,8 +62,6 @@ body {
     padding: 10px;
     border-style: outset;
 }
-
-/* aquí crear filtro de brillo */
 
 .yellow {
     background-color: #F6D98F;
@@ -119,6 +116,10 @@ body {
     color: #fff;
     background-color: #587792;
     font-size: 20px;
+}
+
+.invisible {
+    visibility: hidden;
 }
 
 footer {
