@@ -12,7 +12,7 @@ let level = 0;
 
 function createSequence(maxSequence) {
     const sequence = []
-    for (let index = 0; index < maxSequence; index++) {
+    for (let numeroDeVuelta = 0; numeroDeVuelta < maxSequence; numeroDeVuelta++) {
         let aleatorio = randomPosition();
         sequence.push(aleatorio)
     }
@@ -25,14 +25,14 @@ function increaseLevel() {
     levelNumberElement.innerText = level
 }
 
-function hideStartGameButton () {
+function hideStartGameButton() {
     let startButtonElement = document.getElementById("startButton");
     startButtonElement.classList.add("invisible");
 }
 
 // Inicia el juego por nivel (después de starGame)
-function startLevel (){
-    function showTextLevel(){
+function startLevel() {
+    function showTextLevel() {
         let textLevelElement = document.getElementById("textLevel");
         textLevelElement.classList.remove("invisible");
     }
@@ -41,17 +41,24 @@ function startLevel (){
 
     increaseLevel();
 
-
+    function showUserTurn() {
+        let userTurnElement = document.getElementById("userTurn")
+        userTurnElement.classList.remove("invisible");
+    }
     // Muestra secuencia 
     const sequence = createSequence(level);
 
-        function showSequenceGame() {
-        sequence.forEach((position, index) => {
-            console.log(position);
+    function showSequenceGame() {
+        sequence.forEach((position, numeroDeVuelta) => {
 
             setTimeout(() => {
                 activePosition(position);
-            }, (index + 1) * 900);
+                // length muestra longitud de array 
+                const ultimaVuelta = sequence.length
+                if (ultimaVuelta===numeroDeVuelta+1) {
+                    setTimeout(showUserTurn, 1000)
+                }
+            }, (numeroDeVuelta + 1) * 900);
         });
     }
     showSequenceGame();
