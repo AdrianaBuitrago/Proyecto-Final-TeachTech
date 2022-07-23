@@ -13,8 +13,8 @@
 
   <body>
     <nav>
-      <a href="/index.html">Juegos</a>
-      <a href="/reglas.html">Reglas</a>
+      <a href="/html/index.html">Juegos</a>
+      <a href="/html/reglas.html">Reglas</a>
     </nav>
 
     <header>
@@ -23,18 +23,21 @@
       </h1>
     </header>
 
-    <div class="tablero">
-        <button id="startButton">Start</button>
+    <div class="board">
         <div class="buttonContainerColors">
-            <div class="diamond yellow"></div>
-            <div class="diamond blue"></div>
-            <div class="diamond red"></div>
-            <div class="diamond green"></div>
+            <div class="diamond yellow" id="0"></div>
+            <div class="diamond blue" id="1"></div>
+            <div class="diamond red" id="2"></div>
+            <div class="diamond green" id="3"></div>
         </div>
     </div>
 
+    <div>
+      <button class="startButton" onclick ="startGame()">Start Game</button>
+    </div>
+
    
-    <footer>
+    <footer id="footer">
       <p>&copy; Proyecto TeachTech . 2022 Adriana Buitrago</p>
     </footer>
     
