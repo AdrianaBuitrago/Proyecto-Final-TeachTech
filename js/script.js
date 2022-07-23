@@ -26,22 +26,24 @@ function createSequence(maxSequence) {
 
 function increaseLevel() {
     level = level + 1;
+    let levelNumberElement = document.getElementById("levelNumber");
+    levelNumberElement.innerText = level
 }
 
-function hideStartGameButton (){
-    let startButtonElement = document.getElementById("startButton")
+function hideStartGameButton () {
+    let startButtonElement = document.getElementById("startButton");
     startButtonElement.classList.add("invisible");
 }
 
 function showTextLevel(){
-    let textLevelElement = document.getElementById("textLevel")
+    let textLevelElement = document.getElementById("textLevel");
     textLevelElement.classList.remove("invisible");
 }
 
 // Crear una funcion inicializar start_game, vinculado al button y después ocultarlo.
 function startGame() {
     increaseLevel();
-    const sequence = createSequence(level)
+    const sequence = createSequence(level);
 
     hideStartGameButton();
 
@@ -49,7 +51,7 @@ function startGame() {
 
     function showSequenceGame() {
         sequence.forEach((position, index) => {
-            console.log(position)
+            console.log(position);
 
             setTimeout(() => {
                 activePosition(position);
