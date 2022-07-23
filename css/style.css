@@ -12,37 +12,44 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100%;
-    background-image: linear-gradient(#e4ecf4,#b3cae2);
+    background-image: linear-gradient(#e4ecf4, #b3cae2);
 }
 
-.tittleRules{
+.titleSimon {
+    height: 100px;
+    color: #587792;
+    display: flex;
+    align-items: center;
+}
+
+.titleRules {
     color: #a0b3c9;
     padding: 10px;
 }
+
 .gameRules {
-text-align: center;
-width: 500px;
-color: #fff;
-background-color: #a0b3c9;
-padding: 20px;
-margin: 0 0 25px;
-border-radius: 20px;
+    text-align: center;
+    width: 500px;
+    color: #fff;
+    background-color: #a0b3c9;
+    padding: 20px;
+    margin: 0 0 25px;
+    border-radius: 20px;
 }
 
 /* crear startButton */
- 
 .board {
     height: 520px;
 }
 
 .buttonContainerColors {
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-transform: rotate(45deg);
-width: 400px;
-top: 60px;
-position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    transform: rotate(45deg);
+    width: 400px;
+    top: 60px;
+    position: relative;
 }
 
 .diamond {
@@ -60,7 +67,7 @@ position: relative;
 /* aquí crear filtro de brillo */
 
 .yellow {
-    background-color:#F6D98F;
+    background-color: #F6D98F;
 }
 
 .blue {
@@ -68,16 +75,16 @@ position: relative;
 }
 
 .red {
-    background-color:#e45545;
+    background-color: #e45545;
 }
 
 .green {
-    background-color:#AFC073;
+    background-color: #AFC073;
 }
 
 
 .yellow.active {
-    background-color:#f8f0db;
+    background-color: #f8f0db;
 }
 
 .blue.active {
@@ -85,27 +92,36 @@ position: relative;
 }
 
 .red.active {
-    background-color:#ef968c;
+    background-color: #ef968c;
 }
 
 .green.active {
-    background-color:#e7f4b8;
+    background-color: #e7f4b8;
 }
 
+.infoDisplayer {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
 
+.textLevel {
+    font-size: 20px;
+    color: #587792;
+}
 
-.startButton { 
-    position: relative;
-    top: 10px;
+.startButton {
     cursor: pointer;
     border: none;
     border-radius: 5px;
     color: #fff;
     background-color: #587792;
-} 
+    font-size: 20px;
+}
 
-#footer {
+footer {
     position: absolute;
     bottom: 0;
-
 }
