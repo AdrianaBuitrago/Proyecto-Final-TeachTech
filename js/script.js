@@ -3,15 +3,10 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-//   console.log(randomNumber(0,3));
-
 // función para conseguir posicion aleatoria del tablero
 function randomPosition() {
     return randomNumber(0, 3);
 }
-
-// crear funcion para guardar secuencia con parametro entrada
-// donde una secuencia = array (numeros)
 
 let level = 0;
 
@@ -35,21 +30,22 @@ function hideStartGameButton () {
     startButtonElement.classList.add("invisible");
 }
 
-function showTextLevel(){
-    let textLevelElement = document.getElementById("textLevel");
-    textLevelElement.classList.remove("invisible");
-}
-
-// Crear una funcion inicializar start_game, vinculado al button y después ocultarlo.
-function startGame() {
-    increaseLevel();
-    const sequence = createSequence(level);
-
-    hideStartGameButton();
-
+// Inicia el juego por nivel (después de starGame)
+function startLevel (){
+    function showTextLevel(){
+        let textLevelElement = document.getElementById("textLevel");
+        textLevelElement.classList.remove("invisible");
+    }
+    // Muestra el Nivel
     showTextLevel();
 
-    function showSequenceGame() {
+    increaseLevel();
+
+
+    // Muestra secuencia 
+    const sequence = createSequence(level);
+
+        function showSequenceGame() {
         sequence.forEach((position, index) => {
             console.log(position);
 
@@ -60,9 +56,14 @@ function startGame() {
     }
     showSequenceGame();
 }
-// en cada vuelta llamar a setTimeout para poner los colores
 
+// Inicia startGame, oculta el botón y llama a startLevel
+function startGame() {
+    hideStartGameButton();
+    startLevel();
+}
 
+// funciones para apagar y ecender los colores
 function deactivatePosition(position) {
     let element0 = document.getElementById(position.toString());
     element0.classList.remove("active");
