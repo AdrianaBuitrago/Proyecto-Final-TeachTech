@@ -9,6 +9,7 @@ function randomPosition() {
 }
 
 let level = 0;
+let sequence
 
 function createSequence(maxSequence) {
     const sequence = []
@@ -30,8 +31,8 @@ function hideStartGameButton() {
     startButtonElement.classList.add("invisible");
 }
 
-// startLevel - Inicia el juego por nivel (después de starGame)
-function startLevel() {
+// startNewLevel - Inicia el juego por nivel (después de starGame)
+function startNewLevel() {
     function showTextLevel() {
         let textLevelElement = document.getElementById("textLevel");
         textLevelElement.classList.remove("invisible");
@@ -50,22 +51,50 @@ function startLevel() {
 
 
     // startUserTurn - Inicia el usuario
-    function startUserTurn(){
+    function startUserTurn() {
         let diamondsElements = document.getElementsByClassName("diamond")
 
         for (let diamondElement of diamondsElements) {
             diamondElement.addEventListener("click", verifySequence)
         }
-
+        function removeEventListener (){
+            for (let diamondElement of diamondsElements) {
+                diamondElement.removeEventListener("click", verifySequence)
+            }
+        }
         showUserTurn()
 
-        function verifySequence(){
+        function verifySequence(eventInfo) {
+            const idPulsado = eventInfo.target.id
+            const idCorrecto = sequence[0]
+
+            if (idPulsado == idCorrecto) {
+                // seguimos
+
+                // y eliminamos el 1er elemento del array sequence.shift()
+                sequence.shift()
+                if (sequence.length === 0) {
+                    removeEventListener()
+                    startNewLevel()
+                }
+            } else {
+                // game over (confirm que diga game over y que incluya dos botones, reintentar y cancelar)
+                let result = confirm("😭 Game Over! \n😏 ¿Reintentar partida?")
+                removeEventListener()
+                if (result == true) {
+                    resetGame()
+                    startGame()
+                } else {
+                    resetGame()
+                }
+            }
+
         }
 
     }
 
     // Muestra secuencia 
-    const sequence = createSequence(level);
+    sequence = createSequence(level);
 
     function showSequenceGame() {
         sequence.forEach((position, numeroDeVuelta) => {
@@ -74,19 +103,42 @@ function startLevel() {
                 activePosition(position);
                 // length muestra longitud de array 
                 const ultimaVuelta = sequence.length
-                if (ultimaVuelta===numeroDeVuelta+1) {
+                if (ultimaVuelta === numeroDeVuelta + 1) {
                     setTimeout(startUserTurn, 1000)
                 }
             }, (numeroDeVuelta + 1) * 900);
         });
     }
+    hideUserTurn()
     showSequenceGame();
 }
 
-// Inicia startGame, oculta el botón y llama a startLevel
+// Inicia startGame, oculta el botón y llama a startNewLevel
 function startGame() {
     hideStartGameButton();
-    startLevel();
+    startNewLevel();
+}
+
+function hideTextLevel() {
+    let textLevelElement = document.getElementById("textLevel")
+    textLevelElement.classList.add("invisible");
+}
+
+function hideUserTurn() {
+    let userTurnElement = document.getElementById("userTurn")
+    userTurnElement.classList.add("invisible");
+}
+
+function resetGame() {
+    level = 0
+    hideTextLevel()
+    hideUserTurn()
+
+    function showStartButton() {
+        let startButtonElement = document.getElementById("startButton")
+        startButtonElement.classList.remove("invisible");
+    }
+    showStartButton()
 }
 
 // funciones para apagar y ecender los colores
