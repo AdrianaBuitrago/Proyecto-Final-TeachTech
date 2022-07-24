@@ -30,7 +30,7 @@ function hideStartGameButton() {
     startButtonElement.classList.add("invisible");
 }
 
-// Inicia el juego por nivel (después de starGame)
+// startLevel - Inicia el juego por nivel (después de starGame)
 function startLevel() {
     function showTextLevel() {
         let textLevelElement = document.getElementById("textLevel");
@@ -41,10 +41,29 @@ function startLevel() {
 
     increaseLevel();
 
+
+
     function showUserTurn() {
         let userTurnElement = document.getElementById("userTurn")
         userTurnElement.classList.remove("invisible");
     }
+
+
+    // startUserTurn - Inicia el usuario
+    function startUserTurn(){
+        let diamondsElements = document.getElementsByClassName("diamond")
+
+        for (let diamondElement of diamondsElements) {
+            diamondElement.addEventListener("click", verifySequence)
+        }
+
+        showUserTurn()
+
+        function verifySequence(){
+        }
+
+    }
+
     // Muestra secuencia 
     const sequence = createSequence(level);
 
@@ -56,7 +75,7 @@ function startLevel() {
                 // length muestra longitud de array 
                 const ultimaVuelta = sequence.length
                 if (ultimaVuelta===numeroDeVuelta+1) {
-                    setTimeout(showUserTurn, 1000)
+                    setTimeout(startUserTurn, 1000)
                 }
             }, (numeroDeVuelta + 1) * 900);
         });
