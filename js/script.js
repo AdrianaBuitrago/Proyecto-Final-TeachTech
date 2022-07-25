@@ -9,15 +9,23 @@ function randomPosition() {
 }
 
 let level = 0;
-let sequence
+let sequence = []
 
-function createSequence(maxSequence) {
-    const sequence = []
+// la secuencia no tiene que ser nueva cada vez sino la misma de antes...quitar el shift
+/*function createSequence(maxSequence) {
+    // editar sequence aqui
+    const newSequence = []
     for (let numeroDeVuelta = 0; numeroDeVuelta < maxSequence; numeroDeVuelta++) {
         let aleatorio = randomPosition();
-        sequence.push(aleatorio)
+        newSequence.push(aleatorio)
     }
-    return sequence
+    return newSequence
+}*/
+
+// addPositionToSequence añade un numero aleatorio nuevo a la secuencia que ya tenemos
+function addPositionToSequence() {
+    let aleatorio = randomPosition()
+    sequence.push(aleatorio)
 }
 
 function increaseLevel() {
@@ -42,7 +50,10 @@ function startNewLevel() {
 
     increaseLevel();
 
-
+        // sequence = [2, 3]
+    // Muestra secuencia 
+    addPositionToSequence();
+    // sequence = [2, 3, 1]
 
     function showUserTurn() {
         let userTurnElement = document.getElementById("userTurn")
@@ -64,19 +75,21 @@ function startNewLevel() {
         }
         showUserTurn()
 
+        let positionToVerify = 0 
         function verifySequence(eventInfo) {
             const idPulsado = eventInfo.target.id
-            const idCorrecto = sequence[0]
+            // sequence [3,2,1]
+            const idCorrecto = sequence[positionToVerify] // 3
 
             if (idPulsado == idCorrecto) {
+                positionToVerify++
                 // seguimos
-
-                // y eliminamos el 1er elemento del array sequence.shift()
-                sequence.shift()
-                if (sequence.length === 0) {
+                // si la sig position a verificar de la seq es "la nada", empieza un nuevo nivel
+                if (sequence[positionToVerify]===undefined) {
                     removeEventListener()
                     startNewLevel()
-                }
+                } //este no tiene else
+                
             } else {
                 // game over (confirm que diga game over y que incluya dos botones, reintentar y cancelar)
                 let result = confirm("😭 Game Over! \n😏 ¿Reintentar partida?")
@@ -92,9 +105,6 @@ function startNewLevel() {
         }
 
     }
-
-    // Muestra secuencia 
-    sequence = createSequence(level);
 
     function showSequenceGame() {
         sequence.forEach((position, numeroDeVuelta) => {
@@ -131,6 +141,7 @@ function hideUserTurn() {
 
 function resetGame() {
     level = 0
+    sequence =[]
     hideTextLevel()
     hideUserTurn()
 
