@@ -50,14 +50,19 @@ function startNewLevel() {
 
     increaseLevel();
 
-        // sequence = [2, 3]
+    // sequence = [2, 3]
     // Muestra secuencia 
     addPositionToSequence();
     // sequence = [2, 3, 1]
 
     function showUserTurn() {
         let userTurnElement = document.getElementById("userTurn")
-        userTurnElement.classList.remove("invisible");
+        userTurnElement.classList.remove("invisible")
+
+        let diamondsElements = document.getElementsByClassName("diamond")
+        for (let diamondElement of diamondsElements) {
+            diamondElement.classList.add("cursorPointer")
+        }
     }
 
 
@@ -68,14 +73,14 @@ function startNewLevel() {
         for (let diamondElement of diamondsElements) {
             diamondElement.addEventListener("click", verifySequence)
         }
-        function removeEventListener (){
+        function removeEventListener() {
             for (let diamondElement of diamondsElements) {
                 diamondElement.removeEventListener("click", verifySequence)
             }
         }
         showUserTurn()
 
-        let positionToVerify = 0 
+        let positionToVerify = 0
         function verifySequence(eventInfo) {
             const idPulsado = eventInfo.target.id
             // sequence [3,2,1]
@@ -85,11 +90,11 @@ function startNewLevel() {
                 positionToVerify++
                 // seguimos
                 // si la sig position a verificar de la seq es "la nada", empieza un nuevo nivel
-                if (sequence[positionToVerify]===undefined) {
+                if (sequence[positionToVerify] === undefined) {
                     removeEventListener()
                     startNewLevel()
                 } //este no tiene else
-                
+
             } else {
                 // game over (confirm que diga game over y que incluya dos botones, reintentar y cancelar)
                 let result = confirm("😭 Game Over! \n😏 ¿Reintentar partida?")
@@ -108,7 +113,7 @@ function startNewLevel() {
 
     function showSequenceGame() {
         sequence.forEach((position, numeroDeVuelta) => {
-
+    
             setTimeout(() => {
                 activePosition(position);
                 // length muestra longitud de array 
@@ -137,11 +142,16 @@ function hideTextLevel() {
 function hideUserTurn() {
     let userTurnElement = document.getElementById("userTurn")
     userTurnElement.classList.add("invisible");
+
+    let diamondsElements = document.getElementsByClassName("diamond")
+    for (let diamondElement of diamondsElements) {
+        diamondElement.classList.remove("cursorPointer")
+    }
 }
 
 function resetGame() {
     level = 0
-    sequence =[]
+    sequence = []
     hideTextLevel()
     hideUserTurn()
 
@@ -167,4 +177,3 @@ function activePosition(position) {
 
     const myTimeout = setTimeout(deactivateCurrentPosition, 500);
 }
-
