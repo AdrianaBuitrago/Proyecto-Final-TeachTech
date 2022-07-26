@@ -69,7 +69,6 @@ function startNewLevel() {
     // startUserTurn - Inicia el usuario
     function startUserTurn() {
         let diamondsElements = document.getElementsByClassName("diamond")
-
         for (let diamondElement of diamondsElements) {
             diamondElement.addEventListener("click", verifySequence)
         }
@@ -86,13 +85,15 @@ function startNewLevel() {
             // sequence [3,2,1]
             const idCorrecto = sequence[positionToVerify] // 3
 
+            activePosition(idPulsado)
+
             if (idPulsado == idCorrecto) {
                 positionToVerify++
                 // seguimos
                 // si la sig position a verificar de la seq es "la nada", empieza un nuevo nivel
                 if (sequence[positionToVerify] === undefined) {
                     removeEventListener()
-                    startNewLevel()
+                    setTimeout(startNewLevel, 1500)
                 } //este no tiene else
 
             } else {
